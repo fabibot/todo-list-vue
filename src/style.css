@@ -1,0 +1,278 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*________________________________________________*/
+
+html{
+    font-size: 62.3%;
+    --header-color :  #3d4fb1;
+    --second-color : #80aeff;
+    --secondDark-color : #4d86e7;
+    --third-color : #9af6e4;
+    background-color: #afc8d554;
+}
+
+@font-face {
+    font-family: "Delicious Handrawn";
+    src: url('../src/assets/DeliciousHandrawn-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1, h4, p, label, button{
+    font-family: 'peanut', sans-serif;
+    font-family: 'Gill Sans', sans-serif;
+}  
+
+h1{
+    font-size: 10rem;
+    font-weight: 700;
+}
+
+h3, .addTask{
+    font-family: "Delicious Handrawn", cursive;
+    font-size: 2.5rem;
+}
+
+h4{
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+p{
+    font-size: 1.3rem;
+}
+
+header{
+    background-color: var(--header-color);
+    padding: 10px;
+    height: 105px;
+    display: flex;
+    align-items: center;
+}
+
+header, .projectDiv, .task{
+    box-shadow: 0px 1px 6px #00000069;
+
+}
+
+.mainIcone{
+    margin: 0px 10px;
+    width: 85px;
+    height: 85px;
+    background: url('../src/assets/plan.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#date{
+    margin: 0px 0px -46px 9px;
+}
+
+.content{
+    padding: 30px;
+    display: flex;
+}
+
+.projectDiv{
+    margin-right: 20px;
+    padding: 25px;
+    border: solid 2px var(--second-color);
+    border-radius: 30px;
+    width: clamp(20%, 560px, 31%);
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+
+.projectList{
+    margin: 10px 0px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.project{
+    background-color: var(--second-color);
+    border-radius: 29px;
+    padding: 14px;
+    margin: 5px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.project:hover{
+    background-color: var(--secondDark-color);
+}
+.project > input, input {
+    border-radius: 29px;
+    padding: 3px;
+    border: none;
+}
+
+
+input{
+    border: solid 1px var(--second-color);
+    margin: 5px;
+}
+
+#iconeAdd{
+    display: flex;
+    justify-content: end;
+}
+#iconeAdd > div{
+    background: url('../src/assets/add.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
+#iconeAdd > div:hover{
+    width: 46px;
+    height: 46px;
+}
+
+.tasksDiv{
+    padding: 10px;
+    display: grid;
+    /* grid-template-columns: repeat(3, 160px); */
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-rows: repeat(2, 200px); */
+    gap: 10px;
+    grid-auto-flow: dense;
+}
+
+.task, .addTask{
+    background-color: white;
+    height: 200px;
+    border: solid 2px var(--third-color);
+    border-radius: 15px ;
+    padding: 15px;
+}
+
+.descTask{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 160px;
+}
+
+.smallIcone{
+    border: none;
+    width: 50px;
+    height: 50px;
+    margin: 0px 15px;
+}
+
+.smallIcone:hover{
+    width: 55px;
+    height: 55px;
+}
+
+.addTask{
+    background: url('../src/assets/plus.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.modifyTask{
+    width: 20px;
+    height: 20px;
+    background: url('../src/assets/design.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.deleteProjectIcone{
+    width: 20px;
+    height: 20px;
+    background: url('../src/assets/recycling.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.flex{
+    display: flex;
+}
+
+.task > div{
+    display: flex;
+    margin: 0px 0px 10px 0px;
+}
+.checkbox{
+    background: url('../src/assets/check-box .png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.checked{
+    opacity: 0.6;
+    text-decoration-line: line-through;
+}
+
+.notImportant {
+ border-color: var(--third-color);
+}
+
+.quiteImportant {
+  border-color: orange;
+}
+
+.veryImportant {
+  border-color: red;
+}
+button {
+  border-radius: 5px;
+  border: none;
+  background-color: #80aeff;
+}
