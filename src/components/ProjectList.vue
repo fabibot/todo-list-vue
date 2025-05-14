@@ -1,6 +1,6 @@
 <template>
     <div class="projectList">
-        <div v-for="project in projectList" :key="project.id" id="project.id" :class="{ 'project': true, 'borderBlack': project.isClicked }" @click="changeBorder(project, projectList)">
+        <div v-for="project in projectList" :key="project.id" id="project.id" :class="{ 'project': true, 'borderBlack': project.isClicked }" @click="selectProject(project)">
             <h4>{{project.title}}</h4>
             <div class="deleteProjectIcone" @click="deleteProject(project)"></div>
         </div>
@@ -21,6 +21,9 @@ export default {
                 element.isClicked = false;
             }
             project.isClicked = true;
+        },
+        selectProject(project) {
+            this.$emit('selectProject', project);
         },
         deleteProject(project) {
             this.$emit('deleteProject', project);  

@@ -3,7 +3,7 @@
         <div>
           <h3>Projet</h3>
         </div>
-        <ProjectList v-if='projectList' :projectList='projectList' @deleteProject='handleDelete'/>
+        <ProjectList v-if='projectList' :projectList='projectList' @deleteProject='handleDelete' @selectProject="onSelectProject"/>
         <FormProject v-if="displayFormProject" :projectList="projectList"
             @newProjectSubmitted="addNewProjet"
         />
@@ -28,7 +28,7 @@ export default {
         projectList : Array
     },
     emits: [
-        'newProjectSubmitted', 'deleteProject'
+        'newProjectSubmitted', 'deleteProject', 'selectProject'
     ],
     setup(props, { emit }) {
         const date = ref(0);
@@ -47,8 +47,12 @@ export default {
             emit('newProjectSubmitted', newProject)
         }
 
+        function onSelectProject(project) {
+            emit("selectProject", project);
+        }
+
         return {
-        date, displayAddProject, displayFormProject, handleDelete, addNewProjet
+        date, displayAddProject, displayFormProject, handleDelete, addNewProjet, onSelectProject
         }
     },
 }

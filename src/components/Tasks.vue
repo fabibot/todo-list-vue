@@ -2,6 +2,10 @@
 <div>
   <div class="flex">
     <button class="smallIcone addTask" @click="displayAddTaskForm"></button>
+    <div>
+        <h4 v-if="currentProject">{{ currentProject.title }}</h4>
+    </div>
+
   </div>
   <div class="tasksDiv"> 
     <div :class="getClass(task)" v-for="task in tasksToDisplay" :key="task.id">

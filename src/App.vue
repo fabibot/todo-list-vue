@@ -2,7 +2,9 @@
 <div>
   <Header></Header>
   <div class="content">
-    <Sidebar :projectList="projectList" :projectData="projectData" @newProjectSubmitted="addProject" @deleteProject="deleteProject"></Sidebar>
+    <Sidebar :projectList="projectList" :projectData="projectData" @selectProject="selectProject"
+              @newProjectSubmitted="addProject" @deleteProject="deleteProject"
+    ></Sidebar>
     <div>
       <Tasks :tasksToDisplay="tasksToDisplay" :currentProject='currentProject' @newTaskSubmitted="addTask" @updateTask="updateTask"/>
     </div>
@@ -47,7 +49,7 @@ export default ({
       oldprojectData.push(newProject);
       localStorage.setItem("projectData", JSON.stringify(oldprojectData));
       projectList.value.push(newProject);
-      console.log(projectList.value)
+      currentProject.value = newProject;
     }
 
     function deleteProject(project) {
@@ -59,10 +61,16 @@ export default ({
       }
       projectList.value = ProjectListUpdated;
       localStorage.setItem("projectData", JSON.stringify(projectList.value));
+      currentProject.value = projectList.value[0];
+
+    }
+
+    function selectProject(project) {
+      currentProject.value = project;
     }
 
     return {
-      projectList, tasksToDisplay, currentProject, addTask, updateTask, addProject, projectData, deleteProject
+      projectList, tasksToDisplay, currentProject, addTask, updateTask, addProject, projectData, deleteProject, selectProject
     }
   }
 

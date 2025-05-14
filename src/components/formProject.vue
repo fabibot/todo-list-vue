@@ -14,7 +14,6 @@ export default {
     props: { projectList : Array},
     emits : [ "newProjectSubmitted" ],
     setup(props, { emit }){
-        console.log(ProjectList.value)
         const projectTitle = ref("");
         function validForm() {
             if(projectTitle.value){
