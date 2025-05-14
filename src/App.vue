@@ -1,23 +1,9 @@
 <template>
 <div>
-  <header>
-        <div class="mainIcone"></div>
-        <h1>TodoTodo</h1>
-        <h3 id="date"> {{ date }}</h3>
-  </header>
+  <Header></Header>
   <div class="content">
-    <div class="projectDiv" @click="displayTasks" >
-        <div>
-          <h3>Projet</h3>
-        </div>
-        <ProjectList v-if='projectList' :projectList='projectList' @deleteProject='handleDelete'/>
-        <FormProject v-if="displayFormProject" :projectList="projectList" @newProjectSubmitted="addProject"/>
-          <div id="iconeAdd" @click="displayAddProject" >
-            <div class="smallIcone"></div>
-          </div>
-    </div>
+    <Sidebar :projectList="projectList"></Sidebar>
     <div>
-      
       <Tasks :tasksToDisplay="tasksToDisplay" :currentProject='currentProject' @newTaskSubmitted="addTask" @updateTask="updateTask"/>
     </div>
   </div>
@@ -28,14 +14,15 @@
 import Tasks  from '../src/components/Tasks.vue'
 import ProjectList  from '../src/components/ProjectList.vue'
 import FormProject from '../src/components/formProject.vue'
+import Header from './components/Header.vue'
+import Sidebar from './components/Sidebar.vue'
 export default ({
   props: [],
   components:
-    { Tasks, ProjectList, FormProject }
+    { Tasks, ProjectList, FormProject, Header, Sidebar }
   ,
   data(){
     return {
-      date : "Vendredi 12 février",
       projectList : [],
       tasksToDisplay : null, 
       currentProject : null,
@@ -47,7 +34,6 @@ export default ({
       .then(res => res.json())
       .then(data => this.projectList = data)
       .catch(err => err.message)
-
   },
   methods: {
     displayTasks() {
