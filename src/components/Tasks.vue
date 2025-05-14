@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import FormTask from "./formTask.vue"
-import ModifyTaskForm from "./modifyTaskForm.vue"
+import FormTask from "./FormTask.vue"
+import ModifyTaskForm from "./ModifyTaskForm.vue"
 export default {
   name: 'Tasks',
   props: ['tasksToDisplay', 'currentProject'],
