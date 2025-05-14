@@ -6,33 +6,35 @@
 </template>
 
 <script>
+import ProjectList from './ProjectList.vue';
+import { ref } from 'vue';
+
 export default {
     name: "FormProject",
-    props: ['projectList'],
-    data(){
-        return {
-            projectTitle : null,
-            idCount : null,
-        }
-    },
-    methods: {
-        validForm() {
-            if(this.projectTitle){
+    props: { projectList : Array},
+    emits : [ "newProjectSubmitted" ],
+    setup(props, { emit }){
+        console.log(ProjectList.value)
+        const projectTitle = ref("");
+        function validForm() {
+            if(projectTitle.value){
                 let newId;
-                if(!this.projectList.length) {
+                if(!props.projectList.length) {
                     newId = "p0"
                 } else {
-                    let lastId = this.projectList[this.projectList.length - 1].id;
-                    this.idCount = lastId[1];
-                    this.idCount++;
-                    newId = "p" + this.idCount;
+                    let lastId = props.projectList[props.projectList.length - 1].id;
+                    let idCount = lastId[1];
+                    idCount++;
+                    newId = "p" + idCount;
                 }
-                
                 let newProject = { title: this.projectTitle, id: newId, isClicked:false, tasks: []};
-                this.$emit('newProjectSubmitted', newProject)
-            }
-            
+                emit('newProjectSubmitted', newProject);
+                projectTitle.value = "";
+            }  
         }
-    }
+        return {
+            projectTitle, validForm
+        }
+    },
 }
 </script>

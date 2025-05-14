@@ -2,7 +2,7 @@
 <div>
   <Header></Header>
   <div class="content">
-    <Sidebar :projectList="projectList"></Sidebar>
+    <Sidebar :projectList="projectList" :projectData="projectData" @newProjectSubmitted="addProject" @deleteProject="deleteProject"></Sidebar>
     <div>
       <Tasks :tasksToDisplay="tasksToDisplay" :currentProject='currentProject' @newTaskSubmitted="addTask" @updateTask="updateTask"/>
     </div>
@@ -11,139 +11,141 @@
 </template>
 
 <script>
-import Tasks  from '../src/components/Tasks.vue'
-import ProjectList  from '../src/components/ProjectList.vue'
-import FormProject from '../src/components/formProject.vue'
+import Tasks  from './components/Tasks.vue'
 import Header from './components/Header.vue'
 import Sidebar from './components/Sidebar.vue'
+import { ref } from 'vue'
+import { Project } from '.'
+
 export default ({
-  props: [],
-  components:
-    { Tasks, ProjectList, FormProject, Header, Sidebar }
-  ,
-  data(){
-    return {
-      projectList : [],
-      tasksToDisplay : null, 
-      currentProject : null,
-      displayFormProject : false,
+  components: {
+    Sidebar, Header, Tasks
+  },
+  setup() {
+    const projetString = localStorage.getItem('projectData');
+    let projectData = JSON.parse(projetString);
+
+    if(!projectData) {
+      projectData = [];
+      localStorage.setItem("projectData", JSON.stringify(projectData));
     }
-  },
-  mounted() {
-    fetch('http://localhost:3000/projectList')
-      .then(res => res.json())
-      .then(data => this.projectList = data)
-      .catch(err => err.message)
-  },
-  methods: {
-    displayTasks() {
-      for(let element of this.projectList){
-        if(element.isClicked){
-          this.tasksToDisplay = element.tasks;
-          this.currentProject = element;
-        }
-      }
-    },
-    displayAddProject() {
-      this.displayFormProject = !this.displayFormProject;
 
-    },
-    addProject(newProject) {
-      this.projectList.push(newProject);
-      fetch('http://localhost:3000/projectList', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newProject),
-          })
-          .then(res => res.json())
-          .then(data => {
-          console.log('Projet ajouté avec succès:', data);
-          })
-          .then(this.displayFormProject = false)
-          .catch(err => console.error('Erreur lors de l\'ajout du projet:', err));
+    const projectList = ref(projectData);
+    const tasksToDisplay = ref(null); 
+    const currentProject = ref(null);
 
-    }, 
-    addTask(newTask) {
-      let idTask = this.currentProject.id + "." + this.currentProject.tasks.length;
-      newTask.id = idTask;
-      console.log(idTask)
-      this.currentProject.tasks.push(newTask);                
-      fetch(`http://localhost:3000/projectList/${this.currentProject.id}`, {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(this.currentProject),
-          })
-          .then(response => {
-          if (!response.ok) {
-              throw new Error('Erreur lors de la requête PUT');
-          }
-          return response.json(); 
-          })
-          .then(data => {
-          console.log('Données mises à jour avec succès :', data);
-          })
-          .catch(error => {
-          console.error('Erreur :', error);
-          });
-    },
-    updateTask(updatedTask, oldTask) {
-      console.log(oldTask.id);
-      let updatedProject;
-      for(let i = 0; i < this.projectList.length; i++) {
-        if(this.projectList[i].id == this.currentProject.id) {
-          for(let j = 0; j < this.projectList[i].tasks.length; j++) {
-            if(oldTask.id == this.projectList[i].tasks[j].id) {
-              updatedTask.id = oldTask.id;
-              this.projectList[i].tasks[j] = updatedTask;
-              updatedProject = this.projectList[i];
-            }
-          }
-        }
-      }
-       fetch(`http://localhost:3000/projectList/${this.currentProject.id}`, {
-                method: 'DELETE',
-                })
-                .then(res => res.json())
-                .then(data => {
-                console.log('Projet supprimé avec succès:', data);
-                })
-                .catch(err => console.error('Erreur lors de la suppression du projet:', err));
-        fetch('http://localhost:3000/projectList', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(updatedProject),
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                    console.log('Projet ajouté avec succès:', data);
-                    })
-                    .then(this.displayFormProject = false)
-                    .catch(err => console.error('Erreur lors de l\'ajout du projet:', err));
-    },
-    handleDelete(project) {
-       fetch(`http://localhost:3000/projectList/${project.id}`, {
-                method: 'DELETE',
-                })
-                .then(res => res.json())
-                .then(data => {
-                console.log('Projet supprimé avec succès:', data);
-                })
-                .catch(err => console.error('Erreur lors de la suppression du projet:', err));
+    function addTask() {
+      console.log("addtask");
+    }
+
+    function updateTask() {
+      console.log("update taks");
+    }
+
+    function addProject(newProject) {
+      let oldprojectData = JSON.parse(localStorage.getItem('projectData'));
+      oldprojectData.push(newProject);
+      localStorage.setItem("projectData", JSON.stringify(oldprojectData));
+      projectList.value.push(newProject);
+      console.log(projectList.value)
+    }
+
+    function deleteProject(project) {
       let ProjectListUpdated = [];
-      for(let element of this.projectList){
+      for(let element of projectList.value){
         if(element.id != project.id) {
           ProjectListUpdated.push(element)
         }
       }
-      this.projectList = ProjectListUpdated;
-    } 
+      projectList.value = ProjectListUpdated;
+      localStorage.setItem("projectData", JSON.stringify(projectList.value));
+    }
+
+    return {
+      projectList, tasksToDisplay, currentProject, addTask, updateTask, addProject, projectData, deleteProject
+    }
   }
+
+  // mounted() {
+  //   fetch('http://localhost:3000/projectList')
+  //     .then(res => res.json())
+  //     .then(data => this.projectList = data)
+  //     .catch(err => err.message)
+  // },
+  // methods: {
+    // displayTasks() {
+    //   for(let element of this.projectList){
+    //     if(element.isClicked){
+    //       this.tasksToDisplay = element.tasks;
+    //       this.currentProject = element;
+    //     }
+    //   }
+    // },
+    
+    // }, 
+    // addTask(newTask) {
+    //   let idTask = this.currentProject.id + "." + this.currentProject.tasks.length;
+    //   newTask.id = idTask;
+    //   console.log(idTask)
+    //   this.currentProject.tasks.push(newTask);                
+    //   fetch(`http://localhost:3000/projectList/${this.currentProject.id}`, {
+    //       method: 'PUT',
+    //       headers: {
+    //           'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify(this.currentProject),
+    //       })
+    //       .then(response => {
+    //       if (!response.ok) {
+    //           throw new Error('Erreur lors de la requête PUT');
+    //       }
+    //       return response.json(); 
+    //       })
+    //       .then(data => {
+    //       console.log('Données mises à jour avec succès :', data);
+    //       })
+    //       .catch(error => {
+    //       console.error('Erreur :', error);
+    //       });
+    // },
+    // updateTask(updatedTask, oldTask) {
+    //   console.log(oldTask.id);
+    //   let updatedProject;
+    //   for(let i = 0; i < this.projectList.length; i++) {
+    //     if(this.projectList[i].id == this.currentProject.id) {
+    //       for(let j = 0; j < this.projectList[i].tasks.length; j++) {
+    //         if(oldTask.id == this.projectList[i].tasks[j].id) {
+    //           updatedTask.id = oldTask.id;
+    //           this.projectList[i].tasks[j] = updatedTask;
+    //           updatedProject = this.projectList[i];
+    //         }
+    //       }
+    //     }
+    //   }
+    //    fetch(`http://localhost:3000/projectList/${this.currentProject.id}`, {
+    //             method: 'DELETE',
+    //             })
+    //             .then(res => res.json())
+    //             .then(data => {
+    //             console.log('Projet supprimé avec succès:', data);
+    //             })
+    //             .catch(err => console.error('Erreur lors de la suppression du projet:', err));
+    //     fetch('http://localhost:3000/projectList', {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //                 body: JSON.stringify(updatedProject),
+    //                 })
+    //                 .then(res => res.json())
+    //                 .then(data => {
+    //                 console.log('Projet ajouté avec succès:', data);
+    //                 })
+    //                 .then(this.displayFormProject = false)
+    //                 .catch(err => console.error('Erreur lors de l\'ajout du projet:', err));
+    // },
+    // 
+  // }
 })
 </script>
 
