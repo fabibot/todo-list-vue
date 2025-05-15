@@ -1,9 +1,9 @@
 <template>
-    <header>
+    <header class="container-fluid background-main-blue d-flex align-items-center">
         <div class="mainIcone"></div>
         <h1>TodoTodo</h1>
-        <h3 id="date"> {{ date }}</h3>
-  </header>
+        <h3 id="date" class="delicious-font"> {{ date }}</h3>
+    </header>
 </template>
 
 <script>

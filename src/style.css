@@ -1,56 +1,10 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+@import '../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-/*________________________________________________*/
 
 html{
     font-size: 62.3%;
-    --header-color :  #3d4fb1;
+    --main-blue-color :  #3d4fb1;
     --second-color : #80aeff;
     --secondDark-color : #4d86e7;
     --third-color : #9af6e4;
@@ -64,6 +18,14 @@ html{
     font-style: normal;
 }
 
+.delicious-font {
+    font-family: "Delicious Handrawn", cursive;
+}
+
+.background-main-blue {
+    background-color: var(--main-blue-color);
+}
+
 h1, h4, p, label, button{
     font-family: 'peanut', sans-serif;
     font-family: 'Gill Sans', sans-serif;
@@ -74,10 +36,10 @@ h1{
     font-weight: 700;
 }
 
-h3, .addTask{
+/* h3, .addTask{
     font-family: "Delicious Handrawn", cursive;
     font-size: 2.5rem;
-}
+} */
 
 h4{
     font-size: 1.5rem;
@@ -88,13 +50,13 @@ p{
     font-size: 1.3rem;
 }
 
-header{
-    background-color: var(--header-color);
+/* header{
+    background-color: var(--main-blue-color);
     padding: 10px;
     height: 105px;
     display: flex;
     align-items: center;
-}
+} */
 
 header, .projectDiv, .task{
     box-shadow: 0px 1px 6px #00000069;
@@ -182,9 +144,7 @@ input{
 .tasksDiv{
     padding: 10px;
     display: grid;
-    /* grid-template-columns: repeat(3, 160px); */
     grid-template-columns: repeat(3, 1fr);
-    /* grid-template-rows: repeat(2, 200px); */
     gap: 10px;
     grid-auto-flow: dense;
 }

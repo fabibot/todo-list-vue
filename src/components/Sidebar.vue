@@ -1,7 +1,7 @@
 <template>
     <div class="projectDiv" @click="displayTasks" >
         <div>
-          <h3>Projet</h3>
+          <h3 class="delicious-font">Projet</h3>
         </div>
         <ProjectList v-if='projectList' :projectList='projectList' @deleteProject='handleDelete' @selectProject="onSelectProject"/>
         <FormProject v-if="displayFormProject" :projectList="projectList"

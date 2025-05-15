@@ -3,8 +3,8 @@
   <Header></Header>
   <div class="content">
     <Sidebar :projectList="projectList" :projectData="projectData" @selectProject="selectProject"
-              @newProjectSubmitted="createProject" @deleteProject="deleteProject"
-    ></Sidebar>
+              @newProjectSubmitted="createProject" @deleteProject="deleteProject">
+    </Sidebar>
     <div>
       <Tasks :tasksToDisplay="tasksToDisplay" :currentProject="currentProject" @newTaskSubmitted="addTask" @updateTask="updateTask"/>
     </div>
