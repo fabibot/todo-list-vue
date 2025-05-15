@@ -33,48 +33,51 @@
 <script>
 import FormTask from "./FormTask.vue"
 import ModifyTaskForm from "./ModifyTaskForm.vue"
+import { ref } from "vue";
+
 export default {
   name: 'Tasks',
   props: ['tasksToDisplay', 'currentProject'],
   components: { FormTask, ModifyTaskForm},
-  data() {
-    return {
-      addTaskForm : false,
-      modifyTaskForm : false,
-      taskToModify : null
-    }
-  },
-  methods: {
-    checkTheBox(task) {
-      task.isCheck = !task.isCheck;
-    },
-    displayModifyForm(task){
-      this.modifyTaskForm = !this.modifyTaskForm;
-      this.taskToModify = task;
+  emits : [ 'newTaskSubmitted', 'updateTask' ],
+  setup(props, {emit}) {
+    const addTaskForm = ref(false);
+    const modifyTaskForm = ref(false);
+    const taskToModify = ref(null);
 
-    },
-    displayAddTaskForm() {
-      this.addTaskForm = !this.addTaskForm;
-    },
-    addTask(newTask) {
-      this.addTaskForm = false;
-      this.$emit('newTaskSubmitted', newTask);
-    },
-    getClass(task) {
+    function checkTheBox(task) {
+      task.isCheck = !task.isCheck;
+    }
+    function displayModifyForm(task){
+      modifyTaskForm.value = !modifyTaskForm.value;
+      taskToMovalue = tas.valuek;
+
+    }
+    function displayAddTaskForm() {
+      addTaskForm.value = !addTaskForm.value;
+    }
+    function addTask(newTask) {
+      addTaskForm.value = false;
+      emit('newTaskSubmitted', newTask);
+    }
+    function getClass(task) {
       const className = task.importance;
       return {
         'task': true,
         'checked': task.isCheck,
         [className]: true
       }
-    },
-    handleModified(updatedTask) {
-      this.modifyTaskForm = false;
-      this.$emit('updateTask', updatedTask, this.taskToModify);
+    }
+    function handleModified(updatedTask) {
+      modifyTaskForm.value = false;
+      emit('updateTask', updatedTask, this.taskToModify);
       // console.log(this.taskToModify.title);
       // console.log(updatedTask)
+    }
 
-
+    return {
+      addTaskForm, modifyTaskForm, taskToModify,
+      handleModified, getClass, addTask, displayAddTaskForm, displayModifyForm, getClass, addTask, displayAddTaskForm, checkTheBox
     }
   }
 }

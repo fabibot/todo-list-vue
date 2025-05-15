@@ -29,7 +29,7 @@ export default {
     },
     methods: {
         validForm() {
-            console.log("project submited");
+            // console.log("project submited");
             if(this.title){
                 let newTask = {
                 title: this.title,

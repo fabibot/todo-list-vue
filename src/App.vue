@@ -3,7 +3,7 @@
   <Header></Header>
   <div class="content">
     <Sidebar :projectList="projectList" :projectData="projectData" @selectProject="selectProject"
-              @newProjectSubmitted="addProject" @deleteProject="deleteProject"
+              @newProjectSubmitted="createProject" @deleteProject="deleteProject"
     ></Sidebar>
     <div>
       <Tasks :tasksToDisplay="tasksToDisplay" :currentProject="currentProject" @newTaskSubmitted="addTask" @updateTask="updateTask"/>
@@ -36,20 +36,26 @@ export default ({
     const tasksToDisplay = ref(null); 
     const currentProject = ref(null);
 
-    function addTask() {
-      console.log("addtask");
+    function addTask(data) {
+      const project = projectList.value.find(p => p.id === currentProject.value.id);
+      if (project) {
+        project.tasks.push(data);
+      }
+      localStorage.setItem("projectData", JSON.stringify(projectList.value));
+      tasksToDisplay.value = project.tasks;
     }
 
     function updateTask() {
       console.log("update taks");
     }
 
-    function addProject(newProject) {
+    function createProject(newProject) {
+      let projetCreated = new Project(newProject.title, newProject.id);
       let oldprojectData = JSON.parse(localStorage.getItem('projectData'));
-      oldprojectData.push(newProject);
+      oldprojectData.push(projetCreated);
       localStorage.setItem("projectData", JSON.stringify(oldprojectData));
-      projectList.value.push(newProject);
-      currentProject.value = newProject;
+      projectList.value.push(projetCreated);
+      currentProject.value = projetCreated;
     }
 
     function deleteProject(project) {
@@ -62,59 +68,21 @@ export default ({
       projectList.value = ProjectListUpdated;
       localStorage.setItem("projectData", JSON.stringify(projectList.value));
       currentProject.value = null;
+      tasksToDisplay.value = null;
     }
 
     function selectProject(project) {
       currentProject.value = project;
+      tasksToDisplay.value = project.tasks;
     }
 
     return {
-      projectList, tasksToDisplay, currentProject, addTask, updateTask, addProject, projectData, deleteProject, selectProject
+      projectList, tasksToDisplay, currentProject, addTask, updateTask, createProject, projectData, deleteProject, selectProject
     }
   }
 
-  // mounted() {
-  //   fetch('http://localhost:3000/projectList')
-  //     .then(res => res.json())
-  //     .then(data => this.projectList = data)
-  //     .catch(err => err.message)
-  // },
-  // methods: {
-    // displayTasks() {
-    //   for(let element of this.projectList){
-    //     if(element.isClicked){
-    //       this.tasksToDisplay = element.tasks;
-    //       this.currentProject = element;
-    //     }
-    //   }
-    // },
     
     // }, 
-    // addTask(newTask) {
-    //   let idTask = this.currentProject.id + "." + this.currentProject.tasks.length;
-    //   newTask.id = idTask;
-    //   console.log(idTask)
-    //   this.currentProject.tasks.push(newTask);                
-    //   fetch(`http://localhost:3000/projectList/${this.currentProject.id}`, {
-    //       method: 'PUT',
-    //       headers: {
-    //           'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify(this.currentProject),
-    //       })
-    //       .then(response => {
-    //       if (!response.ok) {
-    //           throw new Error('Erreur lors de la requête PUT');
-    //       }
-    //       return response.json(); 
-    //       })
-    //       .then(data => {
-    //       console.log('Données mises à jour avec succès :', data);
-    //       })
-    //       .catch(error => {
-    //       console.error('Erreur :', error);
-    //       });
-    // },
     // updateTask(updatedTask, oldTask) {
     //   console.log(oldTask.id);
     //   let updatedProject;
