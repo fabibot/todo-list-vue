@@ -1,9 +1,14 @@
 <template>
 <div>
-  <div class="flex">
-    <button class="smallIcone addTask" @click="displayAddTaskForm"></button>
-    <div>
-        <h4 v-if="currentProject">{{ currentProject.title }}</h4>
+  <div class="d-flex">
+    <div v-if="currentProject" class="d-flex align-items-center justify-content-between w-100">
+        <div class="m-5">
+          <h2>{{ currentProject.title }}</h2>
+      </div>
+      <button class="smallIcone addTask" @click="displayAddTaskForm"></button>
+    </div>
+    <div v-else>
+      <p class="m-5 text-secondary">Créez ou sélectionnez un projet pour ajouter des taches</p>
     </div>
 
   </div>
