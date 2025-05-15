@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { generateRandomId } from '..';
+
 export default {
     name: "FormTask",
     props: ['tasksToDisplay', 'currentProject'],
@@ -29,9 +31,10 @@ export default {
     },
     methods: {
         validForm() {
-            // console.log("project submited");
+            console.log("project submited");
             if(this.title){
                 let newTask = {
+                id: generateRandomId(),
                 title: this.title,
                 description: this.description,
                 isCheck: false,

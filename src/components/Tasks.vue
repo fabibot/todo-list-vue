@@ -50,7 +50,7 @@ export default {
     }
     function displayModifyForm(task){
       modifyTaskForm.value = !modifyTaskForm.value;
-      taskToMovalue = tas.valuek;
+      taskToModify.value = task;
 
     }
     function displayAddTaskForm() {
@@ -70,7 +70,7 @@ export default {
     }
     function handleModified(updatedTask) {
       modifyTaskForm.value = false;
-      emit('updateTask', updatedTask, this.taskToModify);
+      emit('updateTask', updatedTask, taskToModify.value);
       // console.log(this.taskToModify.title);
       // console.log(updatedTask)
     }

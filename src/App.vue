@@ -17,7 +17,7 @@ import Tasks  from './components/Tasks.vue'
 import Header from './components/Header.vue'
 import Sidebar from './components/Sidebar.vue'
 import { ref } from 'vue'
-import { Project } from '.'
+import { Project, generateRandomId } from '.'
 
 export default ({
   components: {
@@ -45,8 +45,17 @@ export default ({
       tasksToDisplay.value = project.tasks;
     }
 
-    function updateTask() {
-      console.log("update taks");
+    function updateTask(data) {
+      for(let i = 0; i < projectList.value.length; i++) {
+        if(projectList.value[i].id == currentProject.value.id) {
+          for(let j = 0; j < projectList.value[i].tasks.length; j++) {
+            if(data.id == projectList.value[i].tasks[j].id) {
+              projectList.value[i].tasks[j] = data;
+            }
+          }
+        }
+      }
+        localStorage.setItem("projectData", JSON.stringify(projectList.value));
     }
 
     function createProject(newProject) {

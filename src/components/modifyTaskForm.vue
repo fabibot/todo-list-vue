@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="validForm">
         <label>Title</label>
-        <input v-model="title"  :placeholder="taskToModify.title"><br>
+        <input v-model="title"  :placeholder="taskToModify ? taskToModify.title : ''"><br>
         <label>Description</label>
-        <input v-model="description"  :placeholder="taskToModify.description"><br>
+        <input v-model="description"  :placeholder="taskToModify ? taskToModify.description : ''"><br>
         <label for="">Importance</label><br>
         <input type="radio" id="one" value="notImportant" v-model="importance" />
         <label for="one">1</label>
@@ -29,10 +29,11 @@
         methods: {
             validForm() {
                 let modifiedTask = {
+                    id : this.taskToModify.id,
                     title: this.title,
                     description: this.description,
                     isCheck: false,
-                    importance: this.importance
+                    importance: this.importance,
                 };
                 if(!modifiedTask.title){
                     modifiedTask.title = this.taskToModify.title;
