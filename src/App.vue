@@ -1,13 +1,15 @@
 <template>
-<div>
-  <Header></Header>
-  <div class="content">
+<div class="main-grid">
+  <div class="div-header background-main-blue">
+    <Header></Header>
+  </div>
+  <div class="div-sidebar background-white p-5 d-flex flex-column justify-content-between">
     <Sidebar :projectList="projectList" :projectData="projectData" @selectProject="selectProject"
-              @newProjectSubmitted="createProject" @deleteProject="deleteProject">
+            @newProjectSubmitted="createProject" @deleteProject="deleteProject">
     </Sidebar>
-    <div>
-      <Tasks :tasksToDisplay="tasksToDisplay" :currentProject="currentProject" @newTaskSubmitted="addTask" @updateTask="updateTask"/>
-    </div>
+  </div>
+  <div class="div-tasks">
+    <Tasks :tasksToDisplay="tasksToDisplay" :currentProject="currentProject" @newTaskSubmitted="addTask" @updateTask="updateTask"/>
   </div>
 </div>
 </template>

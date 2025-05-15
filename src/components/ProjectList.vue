@@ -1,10 +1,10 @@
 <template>
-    <div class="projectList">
-        <div v-for="project in projectList" :key="project.id" id="project.id" :class="{ 'project': true, 'borderBlack': project.isClicked }">
-            <div>
-                <h4  @click="selectProject(project)">{{project.title}}</h4>
+    <div>
+        <div v-for="project in projectList" class="d-flex justify-content-between border-top project" :key="project.id" id="project.id" :class="{'borderBlack': project.isClicked }">
+            <div @click="selectProject(project)" class="flex-grow-1 m-3">
+                <h4>{{project.title}}</h4>
             </div>
-            <div class="deleteProjectIcone" @click="deleteProject(project)"></div>
+            <div class="deleteProjectIcone m-3" @click="deleteProject(project)"></div>
         </div>
     </div>
 </template>

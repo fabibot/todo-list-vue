@@ -1,9 +1,9 @@
 <template>
-    <header class="container-fluid background-main-blue d-flex align-items-center">
-        <div class="mainIcone"></div>
-        <h1>TodoTodo</h1>
-        <h3 id="date" class="delicious-font"> {{ date }}</h3>
-    </header>
+    <div class="container-fluid d-flex align-items-center p-2">
+        <div class="mainIcone ms-4"></div>
+        <h1 class="light-blue-color">TodoTodo</h1>
+        <h3 id="date" class="delicious-font mt-5 mx-3 light-blue-color"> {{ date }}</h3>
+    </div>
 </template>
 
 <script>

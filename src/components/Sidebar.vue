@@ -1,16 +1,16 @@
 <template>
-    <div class="projectDiv" @click="displayTasks" >
         <div>
-          <h3 class="delicious-font">Projet</h3>
+            <div>
+                <h2 class="delicious-font h1 mb-5">Projets</h2>
+            </div>
+            <ProjectList v-if='projectList' :projectList='projectList' @deleteProject='handleDelete' @selectProject="onSelectProject"/>
+            <FormProject v-if="displayFormProject" :projectList="projectList"
+                @newProjectSubmitted="addNewProjet"
+            />
         </div>
-        <ProjectList v-if='projectList' :projectList='projectList' @deleteProject='handleDelete' @selectProject="onSelectProject"/>
-        <FormProject v-if="displayFormProject" :projectList="projectList"
-            @newProjectSubmitted="addNewProjet"
-        />
         <div id="iconeAdd" @click="displayAddProject" >
             <div class="smallIcone"></div>
         </div>
-    </div>
 </template>
 
 
