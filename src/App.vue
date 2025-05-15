@@ -6,7 +6,7 @@
               @newProjectSubmitted="addProject" @deleteProject="deleteProject"
     ></Sidebar>
     <div>
-      <Tasks :tasksToDisplay="tasksToDisplay" :currentProject='currentProject' @newTaskSubmitted="addTask" @updateTask="updateTask"/>
+      <Tasks :tasksToDisplay="tasksToDisplay" :currentProject="currentProject" @newTaskSubmitted="addTask" @updateTask="updateTask"/>
     </div>
   </div>
 </div>
@@ -61,8 +61,7 @@ export default ({
       }
       projectList.value = ProjectListUpdated;
       localStorage.setItem("projectData", JSON.stringify(projectList.value));
-      currentProject.value = projectList.value[0];
-
+      currentProject.value = null;
     }
 
     function selectProject(project) {

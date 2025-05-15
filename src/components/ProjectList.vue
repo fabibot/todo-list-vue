@@ -1,7 +1,9 @@
 <template>
     <div class="projectList">
-        <div v-for="project in projectList" :key="project.id" id="project.id" :class="{ 'project': true, 'borderBlack': project.isClicked }" @click="selectProject(project)">
-            <h4>{{project.title}}</h4>
+        <div v-for="project in projectList" :key="project.id" id="project.id" :class="{ 'project': true, 'borderBlack': project.isClicked }">
+            <div>
+                <h4  @click="selectProject(project)">{{project.title}}</h4>
+            </div>
             <div class="deleteProjectIcone" @click="deleteProject(project)"></div>
         </div>
     </div>
