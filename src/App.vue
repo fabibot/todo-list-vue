@@ -3,7 +3,7 @@
   <div class="div-header background-main-blue">
     <Header></Header>
   </div>
-  <div class="div-sidebar background-white p-5 d-flex flex-column justify-content-between">
+  <div class="div-sidebar background-white p-5 d-flex flex-column justify-content-between shadow-sm">
     <Sidebar :projectList="projectList" :projectData="projectData" @selectProject="selectProject"
             @newProjectSubmitted="createProject" @deleteProject="deleteProject">
     </Sidebar>
