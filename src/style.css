@@ -59,11 +59,6 @@ h1{
     font-weight: 700;
 }
 
-/* h3, .addTask{
-    font-family: "Delicious Handrawn", cursive;
-    font-size: 2.5rem;
-} */
-
 h4{
     font-size: 1.5rem;
     font-weight: 800;
@@ -72,18 +67,6 @@ h4{
 p{
     font-size: 1.3rem;
 }
-
-/* header{
-    background-color: var(--main-blue-color);
-    padding: 10px;
-    height: 105px;
-    display: flex;
-    align-items: center;
-} */
-
-/* header, .projectDiv, .task{
-    box-shadow: 0px 1px 6px #00000069;
-} */
 
 .main-grid {
     height: 100%;
@@ -100,7 +83,6 @@ p{
 }
 
 .mainIcone{
-    /* margin: 0px 10px; */
     width: 65px;
     height: 65px;
     background: url('../src/assets/plan.png');
@@ -108,60 +90,18 @@ p{
     background-repeat: no-repeat;
 }
 
-/* #date{
-    margin: 0px 0px -46px 9px;
-} */
-
-/* .content{
-    padding: 30px;
-    display: flex;
-} */
-
-.projectDiv{
-    /* margin-right: 20px;
-    padding: 25px; */
-    /* border: solid 2px var(--second-color);
-    border-radius: 30px; */
-    /* width: clamp(20%, 560px, 31%); */
-    /* height: 100%; */
-    /* display: flex;
-    flex-direction: column; */
-    /* background-color: white; */
-}
-
-
-/* .projectList{
-    margin: 10px 0px;
-    height: max-content;
-    display: flex;
-    flex-direction: column;
-} */
-
 .project{
     transition: all 2s;
-    /* background-color: var(--second-color);
-    border-radius: 6px;
-    width: 50%; */
-    /* padding: 14px;
-    margin: 5px 0px;
-    display: flex;
-    justify-content: space-between; */
 }
 
 .project:hover, .isSelected{
     box-shadow: inset 70rem 0em var(--second-color);
 }
-/* .project > input, input {
-    border-radius: 29px;
-    padding: 3px;
-    border: none;
-}
-
 
 input{
     border: solid 1px var(--second-color);
     margin: 5px;
-} */
+}
 
 #iconeAdd{
     display: flex;
@@ -179,23 +119,15 @@ input{
     height: 46px;
 }
 
-.tasksDiv{
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    grid-auto-flow: dense;
-}
-
 .task, .addTask{
     width: 200px;
+    height: 230px;
     border: solid 2px var(--third-color);
-    border-radius: 15px ;
+    border-radius: 6px ;
     padding: 15px;
 }
 
 .descTask{
-    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -236,10 +168,6 @@ input{
     background-repeat: no-repeat;
 }
 
-/* .flex{
-    display: flex;
-} */
-
 .task > div{
     display: flex;
     margin: 0px 0px 10px 0px;
@@ -269,6 +197,3 @@ input{
 .veryImportant {
   border-color: red;
 }
-/* button {
-  background-color: #80aeff;
-} */

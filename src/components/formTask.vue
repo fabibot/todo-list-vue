@@ -1,10 +1,10 @@
 <template>
-  <form class="task d-flex flex-column" @submit.prevent="validForm">
+  <form class="task d-flex flex-column justify-content-between" @submit.prevent="validForm">
     <label class="form-label">Title</label>
-    <input class="form-control" v-model="title"  ><br>
+    <input class="form-control" v-model="title"  >
     <label class="form-label">Description</label>
-    <input class="form-control" v-model="description"><br>
-    <label for="">Importance</label><br>
+    <input class="form-control" v-model="description">
+    <label for="">Importance</label>
     <div>
         <label class="m-2" for="one">1</label>
         <input class="m-2" type="radio" id="one" value="notImportant" v-model="importance" />
@@ -15,7 +15,6 @@
     </div>
     <p v-if="alertMsg" class="text-danger" style="font-size: 1rem;"> Formulaire non valide</p>
 
-    <br>
 
     <button class="btn background-second-blue justify-self-end">Valider</button>
 </form>

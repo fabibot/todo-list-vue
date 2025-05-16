@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="d-flex">
-    <div v-if="currentProject" class="d-flex align-items-center justify-content-between w-100">
+    <div v-if="currentProject" class="d-flex align-items-center w-100">
         <div class="m-5">
           <h2>{{ currentProject.title }}</h2>
       </div>
@@ -12,9 +12,9 @@
     </div>
 
   </div>
-  <div class="tasksDiv"> 
-    <div :class="getClass(task) " v-for="task in tasksToDisplay" :key="task.id">
-      <div v-if="modifyTaskForm && taskToModify === task" class="background-white">
+  <div class="d-flex flex-wrap px-5"> 
+    <div class="m-3" :class="getClass(task) " v-for="task in tasksToDisplay" :key="task.id">
+      <div v-if="modifyTaskForm && taskToModify === task" class="background-white" style="height:100%">
           <ModifyTaskForm v-if="modifyTaskForm" :currentProject='currentProject' :taskToModify="taskToModify" @taskModified="handleModified"/>
       </div>
       <div v-else style="display: flex; flex-direction : column">
@@ -30,7 +30,7 @@
       </div>
       </div>
     </div>
-    <FormTask class="background-white" v-if="addTaskForm" @newTaskSubmitted="addTask" :tasksToDisplay="tasksToDisplay" :currentProject='currentProject'/>
+    <FormTask class="background-white m-3" v-if="addTaskForm" @newTaskSubmitted="addTask" :tasksToDisplay="tasksToDisplay" :currentProject='currentProject'/>
   </div>
 </div>
 </template>

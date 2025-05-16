@@ -8,7 +8,7 @@
             @newProjectSubmitted="createProject" @deleteProject="deleteProject">
     </Sidebar>
   </div>
-  <div class="div-tasks">
+  <div>
     <Tasks :tasksToDisplay="tasksToDisplay" :currentProject="currentProject" @newTaskSubmitted="addTask" @updateTask="updateTask"/>
   </div>
 </div>
