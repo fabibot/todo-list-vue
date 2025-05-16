@@ -13,7 +13,10 @@
         <label class="m-2" for="three">3</label>
         <input class="m-2" type="radio" id="three" value="veryImportant" v-model="importance" />
     </div>
+    <p v-if="alertMsg" class="text-danger" style="font-size: 1rem;"> Formulaire non valide</p>
+
     <br>
+
     <button class="btn background-second-blue justify-self-end">Valider</button>
 </form>
 
@@ -30,6 +33,7 @@ export default {
             title: '',
             description: '',
             importance: '', 
+            alertMsg : false
         }
     },
     methods: {
@@ -44,7 +48,9 @@ export default {
                 importance: this.importance
                 };
                 this.$emit('newTaskSubmitted', newTask);
-                }
+            } else {
+                this.alertMsg = true;
+            }
         }
     }
 }
