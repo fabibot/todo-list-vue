@@ -13,8 +13,8 @@
 
   </div>
   <div class="tasksDiv"> 
-    <div :class="getClass(task)" v-for="task in tasksToDisplay" :key="task.id">
-      <div v-if="modifyTaskForm && taskToModify === task">
+    <div :class="getClass(task) " v-for="task in tasksToDisplay" :key="task.id">
+      <div v-if="modifyTaskForm && taskToModify === task" class="background-white">
           <ModifyTaskForm v-if="modifyTaskForm" :currentProject='currentProject' :taskToModify="taskToModify" @taskModified="handleModified"/>
       </div>
       <div v-else style="display: flex; flex-direction : column">
@@ -30,7 +30,7 @@
       </div>
       </div>
     </div>
-    <FormTask v-if="addTaskForm" @newTaskSubmitted="addTask" :tasksToDisplay="tasksToDisplay" :currentProject='currentProject'/>
+    <FormTask class="background-white" v-if="addTaskForm" @newTaskSubmitted="addTask" :tasksToDisplay="tasksToDisplay" :currentProject='currentProject'/>
   </div>
 </div>
 </template>
@@ -69,6 +69,7 @@ export default {
       const className = task.importance;
       return {
         'task': true,
+        'background-white' : true,
         'checked': task.isCheck,
         [className]: true
       }

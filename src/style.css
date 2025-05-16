@@ -188,8 +188,7 @@ input{
 }
 
 .task, .addTask{
-    background-color: white;
-    height: 200px;
+    width: 200px;
     border: solid 2px var(--third-color);
     border-radius: 15px ;
     padding: 15px;
