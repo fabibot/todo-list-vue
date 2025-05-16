@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import FormTask from "./FormTask.vue"
-import ModifyTaskForm from "./ModifyTaskForm.vue"
+import FormTask from "./formTask.vue"
+import ModifyTaskForm from "./modifyTaskForm.vue"
 import { ref } from "vue";
 
 export default {

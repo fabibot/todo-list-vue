@@ -16,7 +16,7 @@
 
 <script>
 import { ref } from 'vue'
-import FormProject from './FormProject.vue';
+import FormProject from './formProject.vue';
 import ProjectList from './ProjectList.vue';
 
 export default {
